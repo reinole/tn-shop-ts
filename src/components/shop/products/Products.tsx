@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { Product } from "../product/Product"
+import { Filter } from "../filter/Filter"
 
 import './products.css';
 
@@ -9,38 +10,57 @@ interface Product {
     description: string;
     price: number;
     id: number;
+    category: string;
 }
 
 export const Products = () => {
-    const [products, setProducts] = useState([])
     const [loading, setLoading] = useState(true)
+    const [error, setError] = useState(false)
+    const [filter, setFilter] = useState('All')
+    const [products, setProducts] = useState([])
+    const [filteredProducts, setFilteredProducts] = useState([])
 
     useEffect(() => {
         setLoading(true)
+        setError(false)
         fetch('https://fakestoreapi.com/products')
             .then(res => res.json())
             .then(json => {
                 setProducts(json)
                 setLoading(false)
+            }).catch(() => {
+                setError(true)
+                setLoading(false)
             })
 
     }, [])
 
-    const NoProducts = () => {
-        return <h1>No products found</h1>
-    }
+    useEffect(() => {
+        if (filter === 'All') {
+            setFilteredProducts(products)
+        } else {
+            const filtered = products.filter((product: Product) => product.category === filter)
+            setFilteredProducts(filtered)
+        }
 
-    const LoadingProducts = () => {
-        return <h1>Loading products...</h1>
-    }
+    }, [filter, products])
+
+    if (error) return <h1>Something went wrong</h1>
+
+    if (!products && !loading) return <h1>No products found</h1>
+
+
+    if (loading) return <h1>Loading products...</h1>
+
+
+
 
     return (
         <div>
             <h1>Products</h1>
-            {!products && !loading && <NoProducts />}
-            {loading && <LoadingProducts />}
-            <div className="products-wrapper" >
-                {products && products.map((product: Product) => {
+            <Filter products={products} setFilter={setFilter} />
+            <div className="products-wrapper">
+                {filteredProducts.map((product: Product) => {
                     return (
                         <div className="product-wrapper" key={product.id}>
                             <Product product={product} />
