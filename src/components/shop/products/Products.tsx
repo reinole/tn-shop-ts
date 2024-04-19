@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react"
 import { Product } from "../product/Product"
 
+import './products.css';
+
 interface Product {
     title: string;
     image: string;
@@ -37,14 +39,13 @@ export const Products = () => {
             <h1>Products</h1>
             {!products && !loading && <NoProducts />}
             {loading && <LoadingProducts />}
-            {products && products.map((product: Product) => {
-                return (
-                    <div key={product.id}>
+            <div className="products-wrapper" >
+                {products && products.map((product: Product) => {
+                    return (
                         <Product product={product} />
-                    </div>
-                )
-            })}
-
-        </div>
+                    )
+                })}
+            </div>
+        </div >
     )
 }

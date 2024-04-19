@@ -1,3 +1,5 @@
+import './product.css';
+
 interface ProductProps {
     product: Product;
 }
@@ -11,12 +13,13 @@ interface Product {
 }
 
 export const Product = ({ product }: ProductProps) => {
-    const { title, image, description, price } = product
+    const { title, image, price, id } = product
     return (
-        <div>
+        <div key={id} className="product-wrapper">
+            <div className="image-wrapper">
+                <img src={image} alt={title} />
+            </div>
             <h2>{title}</h2>
-            <img src={image} alt={title} />
-            <p>{description}</p>
             <p>${price}</p>
         </div>
     )

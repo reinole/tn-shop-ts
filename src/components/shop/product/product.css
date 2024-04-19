@@ -1,0 +1,33 @@
+.product-wrapper {
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 200px;
+    height: 320px;
+}
+
+.image-wrapper {
+    display: flex;
+    height: 150px;
+    align-items: center;
+    justify-content: center;
+}
+
+.product-wrapper img {
+    width: 4rem;
+    height: auto;
+    margin: 10px 0;
+}
+
+.product-wrapper h2 {
+    font-size: 1.2em;
+    margin: 10px 0;
+}
+
+.product-wrapper p {
+    font-size: 1em;
+    margin-top: auto;
+}
