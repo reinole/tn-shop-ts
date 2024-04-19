@@ -1,8 +1,10 @@
 import { Products } from './products/Products'
 
+import './shop.css'
+
 export const Shop = () => {
     return (
-        <div>
+        <div className="shop">
             <Products />
         </div>
     )
