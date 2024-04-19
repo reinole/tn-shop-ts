@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { Product } from "../product/Product"
 import { Filter } from "../filter/Filter"
+import { Search } from "../search/Search";
 
 import './products.css';
 
@@ -17,8 +18,8 @@ export const Products = () => {
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(false)
     const [filter, setFilter] = useState('All')
-    const [products, setProducts] = useState([])
-    const [filteredProducts, setFilteredProducts] = useState([])
+    const [products, setProducts] = useState<Product[]>([])
+    const [filteredProducts, setFilteredProducts] = useState<Product[]>([])
 
     useEffect(() => {
         setLoading(true)
@@ -58,6 +59,7 @@ export const Products = () => {
     return (
         <div>
             <h1>Products</h1>
+            <Search products={products} setFilteredProducts={setFilteredProducts} />
             <Filter products={products} setFilter={setFilter} />
             <div className="products-wrapper">
                 {filteredProducts.map((product: Product) => {
