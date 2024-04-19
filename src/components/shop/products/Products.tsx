@@ -42,7 +42,9 @@ export const Products = () => {
             <div className="products-wrapper" >
                 {products && products.map((product: Product) => {
                     return (
-                        <Product product={product} />
+                        <div className="product-wrapper" key={product.id}>
+                            <Product product={product} />
+                        </div>
                     )
                 })}
             </div>

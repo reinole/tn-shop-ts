@@ -13,14 +13,14 @@ interface Product {
 }
 
 export const Product = ({ product }: ProductProps) => {
-    const { title, image, price, id } = product
+    const { title, image, price } = product
     return (
-        <div key={id} className="product-wrapper">
+        <>
             <div className="image-wrapper">
                 <img src={image} alt={title} />
             </div>
             <h2>{title}</h2>
             <p>${price}</p>
-        </div>
+        </>
     )
 }
